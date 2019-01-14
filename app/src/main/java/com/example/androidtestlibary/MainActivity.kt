@@ -5,6 +5,7 @@ import com.google.android.material.snackbar.Snackbar
 import androidx.appcompat.app.AppCompatActivity;
 import android.view.Menu
 import android.view.MenuItem
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
 
@@ -18,10 +19,19 @@ class MainActivity : AppCompatActivity() {
         setSupportActionBar(toolbar)
 
         val viewModel = ViewModelProviders.of(this).get(TestViewModel::class.java)
+        viewModel.viewState.observe(this, Observer { it ->
+
+        })
 
         fab.setOnClickListener { view ->
             Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
                     .setAction("Action", null).show()
+        }
+    }
+
+    private fun render(model: TestModel){
+        when(model){
+            is TestModel.TitleUpdated
         }
     }
 
